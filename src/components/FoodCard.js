@@ -4,7 +4,8 @@ export default function FoodCard({ food, onFoodClick }) {
     if (!food) return null; // Pastikan food terdefinisi sebelum melanjutkan rendering
 
     return (
-        <div className="border p-4 rounded-lg shadow-md">
+        <div className="border p-4 rounded-lg shadow-md"
+            onClick={() => onFoodClick(food)}>
             <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-bold">{food.distance ? `${food.distance} km` : "N/A"}</h2>
                 <h2 className="text-lg font-bold">{food.time ? `${food.time} mins` : "N/A"}</h2>
@@ -30,12 +31,7 @@ export default function FoodCard({ food, onFoodClick }) {
                     </div>
                 </div>
             </div>
-            <button
-                className="mt-2 bg-blue-500 text-white py-1 px-4 rounded-md"
-                onClick={() => onFoodClick(food)}
-            >
-                View Details
-            </button>
+         
         </div>
     );
 }

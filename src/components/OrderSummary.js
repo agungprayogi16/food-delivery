@@ -1,26 +1,51 @@
-import { useState } from "react";
-import { MapPinIcon, UserIcon } from "@heroicons/react/24/outline"; // Import icons from Heroicons
-import userData from "@/data/userData.json"; // Adjust the path to your JSON file
+"use client";
+
+import React, { useState } from "react";
+import { MapPinIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import userData from "@/data/userData.json";
 
 export default function OrderSummary({ myOrder, onClearOrder }) {
-    const [successMessage, setSuccessMessage] = useState(""); // State for success message
-    const [cardNumber, setCardNumber] = useState(""); // State for card number
-    const [expiryDate, setExpiryDate] = useState(""); // State for expiry date
-    const [cvv, setCvv] = useState(""); // State for CVV
+    const [successMessage, setSuccessMessage] = useState("");
+    const [cardNumber, setCardNumber] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [quantities, setQuantities] = useState(myOrder.map(() => 1));
 
-    // Menghitung total harga
-    const totalPrice = myOrder.reduce((total, food) => total + food.price, 0);
+    const deliveryCostPerKm = 10;
+
+    const totalPrice = myOrder.reduce(
+        (total, food, index) => total + food.price * (quantities[index] || 1),
+        0
+    );
+
+    const totalDeliveryFee = myOrder.reduce(
+        (total, food) => total + (Number(food.distance) || 0) * deliveryCostPerKm,
+        0
+    );
+
+    const grandTotal = totalPrice + totalDeliveryFee;
+
+    const handleQuantityChange = (index, quantity) => {
+        const updatedQuantities = [...quantities];
+        updatedQuantities[index] = quantity > 0 ? quantity : 1;
+        setQuantities(updatedQuantities);
+    };
+
+    const handleRemoveItem = (index) => {
+        const updatedOrder = [...myOrder];
+        updatedOrder.splice(index, 1);
+        onClearOrder(updatedOrder); // Pass the updated order to the parent
+        setQuantities(updatedOrder.map(() => 1)); // Reset quantities
+    };
 
     const handleSubmitOrder = () => {
         if (myOrder.length > 0) {
-            // Set the success message
             setSuccessMessage("Purchase successful!");
-            // Optionally, clear the order after submission
-            onClearOrder();
-            // Clear payment information
+            onClearOrder([]);
             setCardNumber("");
             setExpiryDate("");
             setCvv("");
+            setQuantities([]);
         }
     };
 
@@ -37,7 +62,6 @@ export default function OrderSummary({ myOrder, onClearOrder }) {
                 </div>
             </div>
 
-           
             <h2 className="text-xl font-bold mb-4">My Order</h2>
 
             {myOrder.length === 0 ? (
@@ -45,43 +69,65 @@ export default function OrderSummary({ myOrder, onClearOrder }) {
             ) : (
                 <ul>
                     {myOrder.map((food, index) => (
-                        <li key={index} className="flex justify-between mb-2">
+                        <li key={index} className="flex justify-between items-center mb-2">
                             <img
                                 src={food.image}
                                 alt={food.name}
-                                className="w-10 h-10 object-cover rounded-full"
+                                className="w-10 h-10 object-cover rounded-full mr-2"
                             />
-                            <span>{food.name}</span>
-                            <span>{food.price} $</span>
-                           
-                         
-
+                            <input
+                                type="number"
+                                min="1"
+                                value={quantities[index] || 1}
+                                onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
+                                className="w-12 text-center border rounded-md p-1"
+                            />
+                            <span className="flex-1">{food.name}</span>
+                            <span>{food.price * (quantities[index] || 1)} $</span>
+                            <button
+                                className=" hover:text-red-600 ml-2"
+                                onClick={() => handleRemoveItem(index)}
+                            >
+                                <XMarkIcon className="h-4 w-4" />
+                            </button>
                         </li>
                     ))}
                 </ul>
             )}
 
-            <div className="flex justify-end font-bold mt-4">
-                <span>Total :</span>
-                <span>{myOrder.length > 0 ? `${totalPrice} IDR` : '0 $'}</span>
+            <div className="flex justify-between font-bold mt-2">
+                <span>Delivery :</span>
+                <span>{totalDeliveryFee} $</span>
+            </div>
+            <div className="flex justify-end gap-4 font-bold mt-2">
+                <span> Total:</span>
+                <span>{grandTotal} $</span>
             </div>
 
-            {/* Display success message if exists */}
             {successMessage && (
                 <p className="mt-2 text-green-500 text-center">{successMessage}</p>
             )}
 
 
-            {/* Payment Section */}
+            <button
+                className="mt-4 w-full bg-custom-pink text-white py-2 px-4 rounded-md hover:bg-pink-600 transition"
+                onClick={handleSubmitOrder}
+            >
+                Submit Order
+            </button>
             <div className="mt-8">
-                <h4 className="text-lg font-semibold">Payment Information</h4>
+                <img
+                    src="https://i.pinimg.com/564x/5d/30/a0/5d30a085def65e40310d4ac5da6a7f46.jpg"
+                    alt="Credit Card Icon"
+                    className="w-full h-32"
+                />
                 <div className="flex flex-col mb-4">
                     <label className="mb-1" htmlFor="card-number">Card Number</label>
                     <input
                         type="text"
                         id="card-number"
                         className="border rounded-md p-2"
-                        value={cardNumber}
+                        value={cardNumber || ""}
                         onChange={(e) => setCardNumber(e.target.value)}
                         placeholder="Enter your card number"
                     />
@@ -93,7 +139,7 @@ export default function OrderSummary({ myOrder, onClearOrder }) {
                             type="text"
                             id="expiry-date"
                             className="border rounded-md p-2"
-                            value={expiryDate}
+                            value={expiryDate || ""}
                             onChange={(e) => setExpiryDate(e.target.value)}
                             placeholder="MM/YY"
                         />
@@ -104,19 +150,13 @@ export default function OrderSummary({ myOrder, onClearOrder }) {
                             type="text"
                             id="cvv"
                             className="border rounded-md p-2"
-                            value={cvv}
+                            value={cvv || ""}
                             onChange={(e) => setCvv(e.target.value)}
                             placeholder="CVV"
                         />
                     </div>
                 </div>
             </div>
-            <button
-                className="mt-4 w-full bg-custom-pink text-white py-2 px-4 rounded-md hover:bg-pink-600 transition"
-                onClick={handleSubmitOrder}
-            >
-                Submit Order
-            </button>
         </div>
     );
 }
