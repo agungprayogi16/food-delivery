@@ -1,0 +1,77 @@
+
+[
+  {
+    "id": 1,
+    "name": "Burger",
+    "category": "Fast Food",
+    "price": 5,
+    "image": "https://i.pinimg.com/control/564x/22/29/0d/22290dcfd246cc18d795fe19750e6e68.jpg",
+    "reviews": "(1000 reviews)",
+    "rating": 4.5,
+    "description": "Delicious beef burger .",
+    "distance": 2.5 ,
+    "time": 30 
+  },
+  {
+    "id": 2,
+    "name": "Pizza",
+    "category": "Italian",
+    "price": 8,
+     "reviews": "(1000 reviews)",
+    "rating": 4.5,
+    "image": "https://i.pinimg.com/564x/f8/74/68/f874683522f293097ed4a5e33bdb5bea.jpg",
+    "description": "Cheesy pizza with various toppings.",
+    "distance": 2.5,
+    "time": 30
+  },
+  {
+    "id": 3,
+    "name": "Egg Plant salat",
+    "category": "Asian food",
+    "price": 10,
+    "image": "https://i.pinimg.com/564x/42/b9/10/42b9104edd17f5c6c5b766969771785c.jpg",
+     "reviews": "(1000 reviews)",
+    "rating": 4,
+    "description": "Fresh eggplant with salad.",
+    "distance": "2.5",
+    "time": "30 "
+  },
+  {
+    "id": 4,
+    "name": "Sushi ",
+    "category": "Japanese",
+    "price": 120,
+    "image": "https://i.pinimg.com/564x/f1/b5/39/f1b539b9d198f61dc32f10a9bb6c988e.jpg",
+     "reviews": "(1000 reviews)",
+    "rating": 4.5,
+    "description": "Fresh sushi with soy sauce and wasabi.",
+    "distance": 2,
+    "time": 25 
+  },
+  {
+    "id": 5,
+    "name": "Ramen",
+    "category": "Japanese",
+    "price": 120,
+    "image": "https://i.pinimg.com/736x/9b/6f/85/9b6f85391f14955649725bd7a230fdf0.jpg",
+     "reviews": "(1000 reviews)",
+    "rating": 4.2,
+    "description": "Fresh sushi with soy sauce and wasabi.",
+    "distance": 1,
+    "time": 10
+  },
+  {
+    "id": 6,
+    "name": "cake",
+    "category": "dessert",
+    "price": 120,
+    "image": "https://i.pinimg.com/564x/5c/39/5a/5c395a7781b2bab3939ad51fb571a09f.jpg",
+     "reviews": "(1000 reviews)",
+    "rating": 4.5,
+    "description": "cake with fresh ingredients.",
+    "distance": 4.5,
+    "time": 40
+  }
+  
+
+]
