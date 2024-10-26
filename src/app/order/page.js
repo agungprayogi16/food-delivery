@@ -43,7 +43,7 @@ function Page() {
     });
 
     return (
-        <div className="p-10">
+        <div className="lg:p-10">
            
 
             {/* Sort Component */}

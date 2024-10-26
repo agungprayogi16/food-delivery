@@ -7,8 +7,7 @@ import SearchBar from "@/components/SearchBar";
 import FoodCard from "@/components/FoodCard";
 import Sort from "@/components/Sort";
 import Modal from "@/components/Modal";
-import Sidebar from "@/components/Sidebar"; // Import Sidebar
-import Filter from "@/components/Filter"; // Import Filter component
+import Filter from "@/components/Filter";
 import foodsData from "@/data/foods.json";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -20,15 +19,15 @@ export default function HomePage() {
   const [sortOption, setSortOption] = useState("name-asc");
   const [selectedFood, setSelectedFood] = useState(null);
   const [myOrder, setMyOrder] = useState([]);
- 
-  const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
+
+  const [selectedCategory, setSelectedCategory] = useState(""); 
 
   // Extract unique categories from foodsData
   const categories = [...new Set(foodsData.map((food) => food.category))];
 
   const filteredFoods = foodsData
     .filter((food) => food.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter((food) => (selectedCategory ? food.category === selectedCategory : true)) // Filter by category
+    .filter((food) => (selectedCategory ? food.category === selectedCategory : true)) 
     .sort((a, b) => {
       if (sortOption === "name-asc") return a.name.localeCompare(b.name);
       if (sortOption === "name-desc") return b.name.localeCompare(a.name);
@@ -48,13 +47,13 @@ export default function HomePage() {
     alert("Order cleared!");
   };
 
-  // Toggle function for sidebar
-  
+
+
 
   return (
     <>
-      <div className="flex w-full p-3 lg:flex-row flex-col">
-      
+      <div className="flex w-full  lg:p-3 lg:flex-row flex-col">
+
 
         <div className="flex h-screen w-full flex-col lg:ml-20 p-4 ">
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -72,7 +71,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex flex-col justify-end p-1">
-                <Link href="/order-summary" className="flex justify-end mr-4">
+                <Link href="/order" className="flex justify-end mr-4">
                   <i>Learn more</i>
                   <FontAwesomeIcon icon={faArrowRight} className="mt-2 items-end ml-2 flex justify-center" />
                 </Link>

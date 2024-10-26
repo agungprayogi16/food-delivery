@@ -119,7 +119,7 @@ export default function OrderSummary({ myOrder, onClearOrder }) {
                 <img
                     src="https://i.pinimg.com/564x/5d/30/a0/5d30a085def65e40310d4ac5da6a7f46.jpg"
                     alt="Credit Card Icon"
-                    className="w-full h-32"
+                    className="w-64 h-32"
                 />
                 <div className="flex flex-col mb-4">
                     <label className="mb-1" htmlFor="card-number">Card Number</label>
