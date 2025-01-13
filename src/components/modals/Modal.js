@@ -10,6 +10,7 @@ export default function Modal({ food, closeModal, onBuy }) {
         closeModal(); // Tutup modal setelah membeli
     };
 
+
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded-lg w-96 shadow-lg">

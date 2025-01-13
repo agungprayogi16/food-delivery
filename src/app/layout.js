@@ -3,8 +3,8 @@
 import { useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
-import Modal from "@/components/Modal";
+import Sidebar from "@/components/navbar/Sidebar";
+import Modal from "@/components//modals/Modal";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 // Load custom fonts

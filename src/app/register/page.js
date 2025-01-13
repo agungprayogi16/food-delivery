@@ -1,11 +1,11 @@
-import Order from '@/components/component/Order';
+import Register from '@/components/auth/Register';
 
 
 function App() {
     return (
         <div className="flex flex-col w-full h-screen  ">
 
-            <Order />
+            <Register />
             <div className=" mt-2 h-10">
 
             </div>

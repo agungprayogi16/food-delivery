@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { MapPinIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import userData from "@/data/userData.json";
+import { useRouter } from "next/navigation";
 
 export default function OrderSummary({ myOrder, onClearOrder }) {
+    const router = useRouter();
     const [successMessage, setSuccessMessage] = useState("");
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");

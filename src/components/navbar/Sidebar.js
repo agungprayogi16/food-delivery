@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { HomeIcon, ShoppingCartIcon, InformationCircleIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, ShoppingCartIcon, InformationCircleIcon, PhoneIcon, ArrowUturnRightIcon } from "@heroicons/react/24/outline";
 
 const Sidebar = ({ isOpen }) => {
     return (
@@ -16,6 +16,9 @@ const Sidebar = ({ isOpen }) => {
                 <SidebarLink href="/order" ariaLabel="Order" title="Order" icon={<ShoppingCartIcon className="h-8 w-8 md:h-10 md:w-10" />} />
                 <SidebarLink href="/about" ariaLabel="About" title="About" icon={<InformationCircleIcon className="h-8 w-8 md:h-10 md:w-10" />} />
                 <SidebarLink href="/contact" ariaLabel="Contact" title="Contact" icon={<PhoneIcon className="h-8 w-8 md:h-10 md:w-10" />} />
+                <SidebarLink href={"/login"} ariaLabel="Logout" title="Logout" icon={<ArrowUturnRightIcon className="h-8 w-8 md:h-10 md:w-10 " />} />
+
+                {/* Sidebar Links End */}
             </ul>
         </div>
     );
@@ -24,7 +27,7 @@ const Sidebar = ({ isOpen }) => {
 // SidebarLink component for individual links
 const SidebarLink = ({ href, ariaLabel, title, icon }) => (
     <li className="flex flex-row items-center w-full transition-transform duration-200 hover:scale-105">
-        <Link href={href} aria-label={ariaLabel} title={title} className="flex items-center ml-1 text-3xl transition-opacity duration-300 opacity-100">
+        <Link href={href} aria-label={ariaLabel} title={title} className="flex items-center ml-1 text-2xl transition-opacity duration-300 opacity-100">
             {icon}
             <span className="flex items-center w-full p-2 rounded-md">{title}</span>
         </Link>
